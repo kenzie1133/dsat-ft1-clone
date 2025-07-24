@@ -71,6 +71,32 @@ def prediction():
     pred = model.predict([[q]])
     return(render_template("prediction.html",r=pred))
 
+# import sqlite3, datetime
+
+# @app.route("/user_log",methods=["GET","POST"])
+# def user_log():
+
+#     name = request.form.get("q")
+#     t = datetime.datetime.now()
+
+#     conn = sqlite3.connect('user.db')
+#     c = conn.cursor()
+#     c.execute('INSERT INTO user (name,timestamp) VALUES(?,?)',(name,t))
+#     conn.commit()
+#     c.close()
+#     conn.close()
+#     return(render_template("user_log_repy.html"))
+
+# @app.route("/delete_log",methods=["GET","POST"])
+# def delete_log():
+#     conn = sqlite3.connect('user.db')
+#     c = conn.cursor()
+#     c.execute('DELETE FROM user',);
+#     conn.commit()
+#     c.close()
+#     conn.close()
+#     return(render_template("delete_log.html"))
+
 import requests
 
 @app.route("/telegram",methods=["GET","POST"])
@@ -132,6 +158,12 @@ def webhook():
             "text": response_message
         })
     return('ok', 200)
+
+@app.route('/sepia', methods=['GET', 'POST'])
+def sepia():
+    return render_template("sepia_hf.html")    
+
+
 
 if __name__ == "__main__":
     app.run()
